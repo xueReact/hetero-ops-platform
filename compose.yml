@@ -1,0 +1,39 @@
+name: fire-integrated
+services:
+  platform:
+    build: .
+    image: fire-integrated-platform:local
+    ports:
+      - "127.0.0.1:${FIRE_PUBLIC_PORT:-8001}:8000"
+    environment:
+      AIRPORT_UPSTREAM: ${AIRPORT_UPSTREAM:-http://host.docker.internal:8094}
+    volumes:
+      - platform-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+  airport:
+    profiles: [airport]
+    build:
+      context: ./simulations/airport-upgrade
+      args:
+        RUNTIME_IMAGE: ${AIRPORT_RUNTIME_IMAGE:-build-runtime}
+    image: fire-integrated-airport:humble
+    shm_size: 2gb
+    environment:
+      ROS_DOMAIN_ID: "45"
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      AIRPORT_UPGRADE: "1"
+    volumes:
+      - airport-evidence:/opt/airport/runtime/evidence
+      - airport-reports:/opt/airport/runtime/reports
+      - airport-events:/opt/airport/runtime/events
+    restart: unless-stopped
+volumes:
+  platform-data:
+  airport-evidence:
+  airport-reports:
+  airport-events:

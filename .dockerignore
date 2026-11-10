@@ -1,0 +1,10 @@
+.git
+**/__pycache__
+**/runtime
+**/data
+.runtime
+tests
+simulations/airport
+simulations/airport-upgrade/generated
+simulations/airport-upgrade/fuel-models
+*.zip

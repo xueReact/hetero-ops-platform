@@ -1,0 +1,26 @@
+{
+  "mission": "20261109-163826",
+  "status": "completed",
+  "cells": [
+    "completed",
+    "completed",
+    "completed"
+  ],
+  "subtask_count": 12,
+  "evidence_count": 9,
+  "duration_seconds": 175.20746159553528,
+  "task_states": [
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed",
+    "completed"
+  ]
+}

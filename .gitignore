@@ -1,0 +1,23 @@
+# Local editor and Python runtime
+.vscode/
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Mutable local application state
+/platform_app/data/*.json
+/platform_app/data/.gitkeep
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Optional local vision experiment environment
+.venv-vision/
+.vercel
+.runtime/
+/simulations/airport-upgrade/runtime/
+
+# The upgraded airport source replaces the older archived simulation copy.
+simulations/airport/

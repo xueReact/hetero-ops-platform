@@ -1,0 +1,14 @@
+{
+  "site": "杭州电子科技大学（下沙校区）",
+  "observed_at": "实时",
+  "flight_allowed": true,
+  "weather": {
+    "condition": "多云",
+    "temperature_c": 22,
+    "wind_mps": 3.2,
+    "precipitation_mm": 0,
+    "visibility_km": 18
+  },
+  "no_fly_zones": [],
+  "note": "下沙校区实时天气"
+}

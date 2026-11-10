@@ -1,0 +1,58 @@
+[
+  {
+    "route_id": "xiasha-road",
+    "name": "学源街路面",
+    "start": {"x": 50, "y": 50},
+    "end": {"x": 50, "y": 50},
+    "waypoints": [
+      {"id": "学源街西段", "x": 42, "y": 50},
+      {"id": "学源街东段", "x": 62, "y": 50}
+    ],
+    "distance_m": 1600
+  },
+  {
+    "route_id": "xiasha-lake",
+    "name": "金沙湖环湖",
+    "start": {"x": 50, "y": 50},
+    "end": {"x": 50, "y": 50},
+    "waypoints": [
+      {"id": "金沙湖北岸", "x": 65, "y": 58},
+      {"id": "金沙湖东岸", "x": 80, "y": 62}
+    ],
+    "distance_m": 2200
+  },
+  {
+    "route_id": "xiasha-aisle",
+    "name": "教学楼通道",
+    "start": {"x": 50, "y": 50},
+    "end": {"x": 50, "y": 50},
+    "waypoints": [
+      {"id": "教学楼通道", "x": 48, "y": 44},
+      {"id": "楼间连廊", "x": 54, "y": 44}
+    ],
+    "distance_m": 900
+  },
+  {
+    "route_id": "xiasha-roof",
+    "name": "校园屋顶",
+    "start": {"x": 50, "y": 50},
+    "end": {"x": 50, "y": 50},
+    "waypoints": [
+      {"id": "屋顶机房", "x": 56, "y": 42},
+      {"id": "实验楼屋面", "x": 62, "y": 38}
+    ],
+    "distance_m": 1400
+  },
+  {
+    "route_id": "xiasha-gas",
+    "name": "实验楼楼梯",
+    "start": {"x": 50, "y": 50},
+    "end": {"x": 50, "y": 50},
+    "waypoints": [
+      {"id": "实验楼楼梯口", "x": 46, "y": 44},
+      {"id": "楼层平台", "x": 42, "y": 44},
+      {"id": "连廊出口", "x": 42, "y": 50}
+    ],
+    "distance_m": 700
+  }
+]
