@@ -4,7 +4,7 @@ import copy
 import xml.etree.ElementTree as E
 import yaml
 from signs import decorate
-from fleet_config import DEVICES, CELLS, POINTS, EDGES, CAMERA
+from fleet_config import DEVICES, CELLS, POINTS, EDGES, CAMERA, PERSONNEL
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "runtime"
@@ -133,7 +133,7 @@ def clone_agent(source,name,pose,namespace):
         for sensor in list(link.findall("sensor")):link.remove(sensor)
     return clone
 
-for name in ("inspection_dog_2","inspection_dog_3"):
+for name in [n for n,d in DEVICES.items() if d["type"]=="dog" and n!="inspection_dog"]:
     d=DEVICES[name];x,y,z=d["home"]
     w.append(clone_agent(dog,name,f"{x} {y} {z} 0 0 -1.57",d["namespace"]))
 
@@ -154,7 +154,7 @@ for i,(x,y) in enumerate(((.49,.37),(.49,-.37),(-.49,.37),(-.49,-.37))):
     shape(r,"blade","0.43 0.045 0.014","0 0 0 0 0 0","0.2 0.75 0.83 1")
     joint(drone,"rotor_joint_"+str(i),"body","rotor_"+str(i),"0 0 0 0 0 0","0 0 1")
 p=add(drone,"plugin",name="flight_motion",filename="libairport_motion.so");add(add(p,"ros"),"namespace","/drone");add(p,"flying","true")
-for name in ("inspection_drone_2","inspection_drone_3"):
+for name in [n for n,d in DEVICES.items() if d["type"]=="drone" and n!="inspection_drone"]:
     d=DEVICES[name];x,y,z=d["home"]
     w.append(clone_agent(drone,name,f"{x} {y} {z} 0 0 0",d["namespace"]))
 
@@ -200,7 +200,7 @@ for i in range(3):
     shape(l,'rack','1.8 .8 1.2',f'{127+i*2.2} -44 .6 0 0 0','.17 .28 .38 1',True)
     shape(l,'case','1.2 .5 .45',f'{127+i*2.2} -44 1.42 0 0 0','.25 .55 .85 1',True)
 overview=add(w,'model',name='overview_camera');add(overview,'static','true')
-add(overview,'pose','137 -60 22 0 0 0');b=body(overview,'body');camera(b,'overview','0 0 0 0 .80 1.57',True)
+add(overview,'pose','136 -69 29 0 0 0');b=body(overview,'body');camera(b,'overview','0 0 0 0 .75 1.57',True)
 # A fixed clearance sensor looks across the main lane at 0.75 m. Low AMR
 # chassis pass underneath; a maintenance barrier intersects its ray sector.
 gate=add(w,'model',name='lane_monitor');add(gate,'static','true')
@@ -211,6 +211,17 @@ laser(b,'lane_scan','/sensors/lane','0 0 0 0 0 0',True)
 for i,(x,y) in enumerate(((130.,-42.8),(132.,-42.8),(134.,-42.8),(137.,-42.8),(140.,-42.8),(143.5,-41.15))):
     m=add(w,'model',name='detour_mark_'+str(i));add(m,'static','true');b=body(m,'body')
     shape(b,'paint','.65 .10 .012',f'{x} {y} .022 0 0 0','.15 .65 .8 1')
+# A service annex around the existing concourse. New furniture stays outside routes.
+for index,x in enumerate(range(118,154,5)):
+    m=add(w,'model',name='service_counter_'+str(index));add(m,'static','true');l=body(m,'body')
+    shape(l,'desk','3.2 1 1',f'{x} -23.5 .5 0 0 0','.14 .27 .34 1',True)
+    shape(l,'screen','1.1 .12 .7',f'{x} -23.5 1.4 0 0 0','.08 .65 .72 1')
+    shape(l,'awning','3.8 1.4 .12',f'{x} -23.5 2.9 0 0 0','.30 .48 .58 1')
+for staff in PERSONNEL:
+    x,y,_=staff['home'];m=add(w,'model',name='staff_station_'+staff['id']);add(m,'static','true');l=body(m,'body')
+    shape(l,'station','.8 .6 .03',f'{x} {y} .02 0 0 0','.7 .55 .9 1')
+    # This is a roster station marker, not a measured person position.
+    shape(l,'terminal','.18 .18 1.4',f'{x} {y} .7 0 0 0','.37 .32 .52 1')
 decorate(w,ROOT)
 E.indent(tree);tree.write(OUT/'airport.world',encoding='utf-8',xml_declaration=True)
 vertices=[[x,y,{'name':n,**({'is_charger':True,'is_parking_spot':True} if 'dock' in n else {})}] for x,y,n in POINTS]
@@ -229,4 +240,4 @@ for fleet,port,speed in [('logistics',22011,.7),('inspectionDog',22012,.8)]:
         r=copy.deepcopy(template);r['rmf_config']['start']={'map_name':'L1','waypoint':d['dock'],'orientation':-1.57}
         r['rmf_config']['charger']={'waypoint':d['dock']};r['robot_config']['max_delay']=30;c['robots'][n]=r
     (OUT/(fleet+'.yaml')).write_text(yaml.safe_dump(c))
-print('Generated 8 devices, three service areas and two RMF ground fleets.')
+print('Generated 21 devices, seven workcells and seven roster workstations.')

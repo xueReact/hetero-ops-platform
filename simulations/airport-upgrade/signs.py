@@ -39,7 +39,7 @@ def decorate(world, root):
     sign("dog_service",145,-33.3,1.9,4.6,.8,"A / POWER","ELECTRICAL EQUIPMENT",(244,196,103))
     sign("air_service",135,-33.3,1.9,4.6,.8,"B / BAGGAGE","CONVEYOR MAINTENANCE",(96,222,199))
     sign("amr_service",125,-33.3,1.9,4.6,.8,"C / SECURITY","COMMUNICATION SYSTEM",(124,180,255))
-    sign("logistics",132,-44,1.8,6.2,1.0,"SERVICE LOGISTICS","2 AMRs / 3 WORK ORDERS",(124,180,255))
+    sign("logistics",132,-44,1.8,6.2,1.0,"SERVICE LOGISTICS","7 ROBOTS / 7 WORKCELLS",(124,180,255))
     # Seats stay outside all demonstrated traffic paths.
     for i in range(4):
         x=128.5+2.8*i

@@ -18,7 +18,7 @@ from sensor_msgs.msg import LaserScan
 from std_msgs.msg import String
 from std_srvs.srv import Empty
 import websockets
-from fleet_config import CELLS, DEVICES, LOCATIONS, CAMERA, POINTS, EDGES
+from fleet_config import CELLS, DEVICES, LOCATIONS, CAMERA, POINTS, EDGES, PERSONNEL
 
 ROOT=Path("/opt/airport")
 app=Flask(__name__,static_folder=str(ROOT/"site"),static_url_path="")
@@ -336,15 +336,16 @@ def run_cell(cell,pool):
 
 def run_mission():
     pool=queue.Queue()
-    for n in ('logistics_1','logistics_2'):pool.put(n)
+    for n,d in DEVICES.items():
+        if d['type']=='amr':pool.put(n)
     try:
         with ThreadPoolExecutor(max_workers=3) as ex:
-            jobs=[ex.submit(run_cell,c,pool) for c in CELLS]
+            jobs=[ex.submit(run_cell,c,pool) for c in CELLS if c['id'] in state['mission']['selected_cells']]
             for job in jobs:job.result()
         with lock:
             state['mission'].update(status='completed',finished=time.time(),finished_sim=state['sim_seconds'])
             for s in state['mission']['steps']:s['status']='completed'
-        event('8 台设备完成三处协同工单，已返回待命位')
+        event('所选作业区已闭环，设备返回待命位，报告归档')
     except Exception as e:
         with lock:state['mission'].update(status='failed',error=str(e),finished=time.time())
         event('联合任务异常：'+str(e))
@@ -367,7 +368,7 @@ def status():
             completed=all(rank[c["phase"]]>i for c in cells)
             active=any(c.get("phase") in phases for c in cells)
             d["mission"]["steps"][i]["status"]="completed" if completed else ("running" if active else "pending")
-    d["scene"]={"camera":CAMERA,"cells":CELLS,"points":POINTS,"edges":EDGES}
+    d["scene"]={"camera":CAMERA,"cells":CELLS,"points":POINTS,"edges":EDGES,"personnel":PERSONNEL}
     d["obstacle"]=copy.deepcopy(state["obstacle"])
     d["paths"]=copy.deepcopy(state["paths"])
     d["path_history"]=copy.deepcopy(state["path_history"][-30:])
@@ -402,26 +403,30 @@ def status():
             if online and not d["paused"]:mode="待命"
         d["devices"].append(dict(id=name,**meta,pose=p,online=online,moving=moving,mode=mode,action=action,phase=a.get("phase","idle"),target=target,workcell=a.get("cell",meta.get("cell"))))
     names={r["name"] for f in d["fleets"] for r in f["robots"]}
-    expected={"logistics_1","logistics_2","inspection_dog","inspection_dog_2","inspection_dog_3"}
+    expected={n for n,d in DEVICES.items() if d.get("fleet")}
     d["ready"]=d["live"] and expected.issubset(names) and all(x["online"] for x in d["devices"]) and all(d["cameras"].get(n,{}).get("age",999)<5 for n in ("overview","dog","drone")) and now-d["agents_received"]<5
     return jsonify(d)
 @app.post("/api/mission")
 def mission():
+    payload=request.get_json(silent=True) or {}
+    selected=payload.get('cells') or [c['id'] for c in CELLS]
+    if not isinstance(selected,list) or any(c not in [x['id'] for x in CELLS] for c in selected) or len(set(selected))!=len(selected):
+        return jsonify(error='作业区无效'),400
     d=status().get_json()
     with lock:
         if state["mission"]["status"]=="running":return jsonify(error="联合任务正在运行"),409
         if not d["ready"] or state["paused"]:return jsonify(error="请等待仿真、车队和相机就绪"),503
-        state["mission"]={"id":time.strftime("%Y%m%d-%H%M%S"),"status":"running","started":time.time(),"task_ids":[],"evidence":[],
-            "cells":[{"id":c["id"],"name":c["name"],"phase":"queued","detail":"等待机器狗派遣","dog":c["dog"],"drone":c["drone"]} for c in CELLS],
+        state["mission"]={"id":time.strftime("%Y%m%d-%H%M%S")+"-"+uuid.uuid4().hex[:6],"selected_cells":selected,"platform_task_id":payload.get("platform_task_id"),"status":"running","started":time.time(),"task_ids":[],"evidence":[],
+            "cells":[{"id":c["id"],"name":c["name"],"phase":"queued","detail":"等待机器狗派遣","dog":c["dog"],"drone":c["drone"]} for c in CELLS if c["id"] in selected],
             "abort":False,"started_sim":state["sim_seconds"],
-            "assignments":{n:{"action":"等待机器狗到点告警" if x["type"]=="drone" else "等待复核结果与配送分配" if x["type"]=="amr" else "等待 RMF 派遣","phase":"waiting"} for n,x in DEVICES.items()},"dispatches":[],"timeline":[],
+            "assignments":{n:{"action":("仓位待命 · 可接受配送" if x["type"]=="amr" else "本轮未派单" if x.get('cell') not in selected else "等待机器狗到点告警" if x["type"]=="drone" else "等待 RMF 派遣"),"phase":"idle" if x["type"]=="amr" or x.get('cell') not in selected else "waiting"} for n,x in DEVICES.items()},"dispatches":[],"timeline":[],
             "steps":[
-                {"name":"三点地面初检","detail":"DOG-01 / DOG-02 / DOG-03 · RMF 多车队并行巡检","status":"pending"},
-                {"name":"分层空中复核","detail":"UAV-01 / UAV-02 / UAV-03 · 到点告警后才起飞","status":"pending"},
-                {"name":"工具箱条件交接","detail":"复核确认后 AMR-01 / AMR-02 前往不同交接点","status":"pending"},
-                {"name":"全队返航与归档","detail":"8 台设备返回待命位，报告和证据保存","status":"pending"}]}
+                {"name":"七区地面初检","detail":"DOG-01 至 DOG-07 · RMF 多车队并行巡检","status":"pending"},
+                {"name":"分层空中复核","detail":"DRONE-01 至 DRONE-07 · 到点告警后才起飞","status":"pending"},
+                {"name":"工具箱条件交接","detail":"复核确认后 ROBOT-01 至 ROBOT-07 前往不同交接点","status":"pending"},
+                {"name":"全队返航与归档","detail":"参与设备返回待命位，报告和证据保存","status":"pending"}]}
     threading.Thread(target=run_mission,daemon=True).start()
-    return jsonify(success=True)
+    return jsonify(success=True,mission_id=state["mission"]["id"])
 @app.post("/api/physics")
 def physics():
     action=(request.get_json(silent=True) or {}).get("action")
