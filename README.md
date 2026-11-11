@@ -70,6 +70,6 @@ python -m unittest discover -s tests -p "test_*airport*.py" -v
 | `simulations/airport-upgrade/` | 场景、车队、协作流程及控制台 |
 | `compose.yml` | 服务与持久化数据卷 |
 | `docs/集成说明.md` | 接口、扩展方法及来源 |
-| `docs/融合验证记录.md` | 本轮实测记录 |
+| `docs/集成验证记录.md` | 本轮实测记录 |
 
 `platform-data` 保存项目、资源档案、任务和机场任务快照；机场证据、报告和事件各有独立卷。运行服务重启后未完成旧工单标为异常，检查设备后新建工单。日常停止不要使用 `docker compose down -v`，它会删除数据卷。
