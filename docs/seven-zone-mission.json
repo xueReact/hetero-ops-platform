@@ -1,0 +1,1152 @@
+{
+  "abort": false,
+  "assignments": {
+    "inspection_dog": {
+      "action": "任务完成 · 待命",
+      "cell": "A",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_dog_2": {
+      "action": "任务完成 · 待命",
+      "cell": "B",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_dog_3": {
+      "action": "任务完成 · 待命",
+      "cell": "C",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_dog_4": {
+      "action": "任务完成 · 待命",
+      "cell": "D",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_dog_5": {
+      "action": "任务完成 · 待命",
+      "cell": "E",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_dog_6": {
+      "action": "任务完成 · 待命",
+      "cell": "F",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_dog_7": {
+      "action": "任务完成 · 待命",
+      "cell": "G",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone": {
+      "action": "任务完成 · 已降落",
+      "cell": "A",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone_2": {
+      "action": "任务完成 · 已降落",
+      "cell": "B",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone_3": {
+      "action": "任务完成 · 已降落",
+      "cell": "C",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone_4": {
+      "action": "任务完成 · 已降落",
+      "cell": "D",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone_5": {
+      "action": "任务完成 · 已降落",
+      "cell": "E",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone_6": {
+      "action": "任务完成 · 已降落",
+      "cell": "F",
+      "phase": "idle",
+      "target": null
+    },
+    "inspection_drone_7": {
+      "action": "任务完成 · 已降落",
+      "cell": "G",
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_1": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_2": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_3": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_4": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_5": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_6": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    },
+    "logistics_7": {
+      "action": "仓位待命 · 可接受下一处配送",
+      "cell": null,
+      "phase": "idle",
+      "target": null
+    }
+  },
+  "cells": [
+    {
+      "air_id": "e2d1e087ce59407583b67924495b8cab",
+      "alarm": {
+        "sim": 56.784,
+        "source": "scenario_injection",
+        "type": "温升告警"
+      },
+      "amr": "logistics_2",
+      "cargo": "绝缘检测工具箱",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog",
+      "drone": "inspection_drone",
+      "handoff": {
+        "amr": {
+          "angular_speed": -9.461054707480386E-07,
+          "mode": 0,
+          "received": 1794356593.9461412,
+          "sample_time": 123.48,
+          "source": "gazebo_robot_state",
+          "speed": 0.0,
+          "task_id": "15",
+          "x": 144.9998779296875,
+          "y": -38.01255416870117,
+          "yaw": 1.561070203781128,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356594.0202258,
+          "source": "gazebo_odometry",
+          "speed": 2.2660249605262E-15,
+          "x": 145.05172439143826,
+          "y": -35.52827096049611,
+          "yaw": 2.649373069239654,
+          "z": 0.6199163583060857
+        },
+        "sim": 123.656,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 119.392,
+      "id": "A",
+      "name": "A区 · 配电设备",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 68.328
+    },
+    {
+      "air_id": "d85e3d2759cf4d7296f4530dce7bf39c",
+      "alarm": {
+        "sim": 56.784,
+        "source": "scenario_injection",
+        "type": "振动告警"
+      },
+      "amr": "logistics_1",
+      "cargo": "输送机维护工具箱",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog_2",
+      "drone": "inspection_drone_2",
+      "handoff": {
+        "amr": {
+          "angular_speed": 0.0,
+          "mode": 0,
+          "received": 1794356578.8221853,
+          "sample_time": 108.359999999,
+          "source": "gazebo_robot_state",
+          "speed": 0.0,
+          "task_id": "15",
+          "x": 134.99989318847656,
+          "y": -38.01218795776367,
+          "yaw": 1.562510371208191,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356579.0391932,
+          "source": "gazebo_odometry",
+          "speed": 6.701365896566016E-16,
+          "x": 135.05172439143846,
+          "y": -35.528270960492485,
+          "yaw": 2.649373077680495,
+          "z": 0.6199163583060724
+        },
+        "sim": 108.888,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 104.624,
+      "id": "B",
+      "name": "B区 · 行李输送",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 68.328
+    },
+    {
+      "air_id": "c889214743364d6084b6d9fd3414e7d2",
+      "alarm": {
+        "sim": 57.304,
+        "source": "scenario_injection",
+        "type": "设备离线"
+      },
+      "amr": "logistics_3",
+      "cargo": "备用通信模块",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog_3",
+      "drone": "inspection_drone_3",
+      "handoff": {
+        "amr": {
+          "angular_speed": 0.0,
+          "mode": 0,
+          "received": 1794356558.65613,
+          "sample_time": 88.2,
+          "source": "gazebo_robot_state",
+          "speed": 2.2706531297952928E-05,
+          "task_id": "10",
+          "x": 125.00000762939453,
+          "y": -38.01233673095703,
+          "yaw": 1.5714002847671509,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356558.857758,
+          "source": "gazebo_odometry",
+          "speed": 1.4464816815037814E-15,
+          "x": 125.05173198054136,
+          "y": -35.52827718436677,
+          "yaw": 2.6495733024574943,
+          "z": 0.619913919166679
+        },
+        "sim": 88.608,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 84.344,
+      "id": "C",
+      "name": "C区 · 安防设施",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 68.848
+    },
+    {
+      "air_id": "ba4f7241b201417a8114f351b8cece29",
+      "alarm": {
+        "sim": 111.384,
+        "source": "scenario_injection",
+        "type": "压力复核"
+      },
+      "amr": "logistics_4",
+      "cargo": "压力检测工具",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog_4",
+      "drone": "inspection_drone_4",
+      "handoff": {
+        "amr": {
+          "angular_speed": -1.8922109490048781E-06,
+          "mode": 0,
+          "received": 1794356657.9722285,
+          "sample_time": 187.487999999,
+          "source": "gazebo_robot_state",
+          "speed": 1.5137687592039025E-05,
+          "task_id": "22",
+          "x": 120.01200103759766,
+          "y": -38.00359344482422,
+          "yaw": 2.8510582447052,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356657.8937302,
+          "source": "gazebo_odometry",
+          "speed": 6.704696673662034E-16,
+          "x": 120.05171882406698,
+          "y": -35.528267841993795,
+          "yaw": 2.6479118254867005,
+          "z": 0.6199205948898538
+        },
+        "sim": 187.72,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 183.664,
+      "id": "D",
+      "name": "D区 · 消防设施",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 122.928
+    },
+    {
+      "air_id": "2e5aad6db5d4403baf1612cbda6c0e8e",
+      "alarm": {
+        "sim": 151.944,
+        "source": "scenario_injection",
+        "type": "闸机复核"
+      },
+      "amr": "logistics_5",
+      "cargo": "闸机维护组件",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog_5",
+      "drone": "inspection_drone_5",
+      "handoff": {
+        "amr": {
+          "angular_speed": 0.0,
+          "mode": 0,
+          "received": 1794356692.7558932,
+          "sample_time": 222.264,
+          "source": "gazebo_robot_state",
+          "speed": 0.0,
+          "task_id": "26",
+          "x": 130.00010681152344,
+          "y": -38.01227569580078,
+          "yaw": 1.5786727666854858,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356693.0532737,
+          "source": "gazebo_odometry",
+          "speed": 5.553482169523301E-16,
+          "x": 130.05172683270087,
+          "y": -35.52827285319259,
+          "yaw": 2.649369680282243,
+          "z": 0.619915078698325
+        },
+        "sim": 222.768,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 218.504,
+      "id": "E",
+      "name": "E区 · 登机服务",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 163.696
+    },
+    {
+      "air_id": "272598eb9e434b35a5cd8eb3dbf8b3f2",
+      "alarm": {
+        "sim": 195.208,
+        "source": "scenario_injection",
+        "type": "通风复核"
+      },
+      "amr": "logistics_6",
+      "cargo": "环境采样组件",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog_6",
+      "drone": "inspection_drone_6",
+      "handoff": {
+        "amr": {
+          "angular_speed": 0.0,
+          "mode": 0,
+          "received": 1794356727.0355337,
+          "sample_time": 256.536,
+          "source": "gazebo_robot_state",
+          "speed": 0.0,
+          "task_id": "25",
+          "x": 139.99020385742188,
+          "y": -38.00740051269531,
+          "yaw": 0.6469741463661194,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356726.9645314,
+          "source": "gazebo_odometry",
+          "speed": 3.3346810282769876E-15,
+          "x": 140.0517190713848,
+          "y": -35.52826803136204,
+          "yaw": 2.6480417133234773,
+          "z": 0.6199205196785892
+        },
+        "sim": 256.568,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 252.304,
+      "id": "F",
+      "name": "F区 · 环境监测",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 206.752
+    },
+    {
+      "air_id": "4abf4305bf6c4f1eb91d5c990586e494",
+      "alarm": {
+        "sim": 276.016,
+        "source": "scenario_injection",
+        "type": "信号复核"
+      },
+      "amr": "logistics_7",
+      "cargo": "通信维护工具",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "dog": "inspection_dog_7",
+      "drone": "inspection_drone_7",
+      "handoff": {
+        "amr": {
+          "angular_speed": 7.095791058768693E-07,
+          "mode": 0,
+          "received": 1794356797.1064036,
+          "sample_time": 326.591999999,
+          "source": "gazebo_robot_state",
+          "speed": 0.0,
+          "task_id": "28",
+          "x": 149.99041748046875,
+          "y": -38.00723648071289,
+          "yaw": 0.6465933322906494,
+          "z": 0.15
+        },
+        "dog": {
+          "angular_speed": 0.0,
+          "received": 1794356797.4919384,
+          "source": "gazebo_odometry",
+          "speed": 1.5085283289697512E-15,
+          "x": 150.0517319548372,
+          "y": -35.528277249746665,
+          "yaw": 2.649361898837731,
+          "z": 0.6199139689483071
+        },
+        "sim": 327.288,
+        "type": "work_order_acknowledgement"
+      },
+      "handoff_started": 323.128,
+      "id": "G",
+      "name": "G区 · 通信机柜",
+      "phase": "completed",
+      "resolved": true,
+      "verified": true,
+      "verified_at": 287.56
+    }
+  ],
+  "dispatches": [
+    {
+      "cell": "B",
+      "robot": "inspection_dog_2",
+      "sim": 51.064,
+      "target": "inspect_b",
+      "task_id": "airport_823f9f5dfc8144c7931b867e0c8da5eb"
+    },
+    {
+      "cell": "A",
+      "robot": "inspection_dog",
+      "sim": 51.064,
+      "target": "inspect_a",
+      "task_id": "airport_42c129a8d79842c0956703c02306bf0c"
+    },
+    {
+      "cell": "C",
+      "robot": "inspection_dog_3",
+      "sim": 51.064,
+      "target": "inspect_c",
+      "task_id": "airport_890a27fb9d144a189c6cafb1c633ed20"
+    },
+    {
+      "cell": "A",
+      "robot": "logistics_2",
+      "sim": 68.328,
+      "target": "delivery_a",
+      "task_id": "airport_d2ed3594c6b94acbbe5917d2b9d3de6d"
+    },
+    {
+      "cell": "B",
+      "robot": "logistics_1",
+      "sim": 68.328,
+      "target": "delivery_b",
+      "task_id": "airport_2289d14671524d4ebe1138ac8d0dd77b"
+    },
+    {
+      "cell": "C",
+      "robot": "logistics_3",
+      "sim": 68.848,
+      "target": "delivery_c",
+      "task_id": "airport_8fb05757b1d34870ba8212bb6b6c65ed"
+    },
+    {
+      "cell": "C",
+      "robot": "inspection_dog_3",
+      "sim": 88.608,
+      "target": "dog_dock_3",
+      "task_id": "airport_6d1d722ac944496ea2b902852407ccb0"
+    },
+    {
+      "cell": "C",
+      "robot": "logistics_3",
+      "sim": 88.608,
+      "target": "amr_dock_3",
+      "task_id": "airport_432f9bcc8a5949a7890fc1e36b3139aa"
+    },
+    {
+      "cell": "D",
+      "robot": "inspection_dog_4",
+      "sim": 104.624,
+      "target": "inspect_d",
+      "task_id": "airport_0d13a82218ee4a65993b4b7692293328"
+    },
+    {
+      "cell": "B",
+      "robot": "inspection_dog_2",
+      "sim": 108.888,
+      "target": "dog_dock_2",
+      "task_id": "airport_3d973961d34046d2b419992a61be704d"
+    },
+    {
+      "cell": "B",
+      "robot": "logistics_1",
+      "sim": 108.888,
+      "target": "amr_dock",
+      "task_id": "airport_c00f42f5059a4065b0086948d2407830"
+    },
+    {
+      "cell": "D",
+      "robot": "logistics_4",
+      "sim": 122.928,
+      "target": "delivery_d",
+      "task_id": "airport_aaab562317f244d1b0fa48e7b3286966"
+    },
+    {
+      "cell": "A",
+      "robot": "inspection_dog",
+      "sim": 123.656,
+      "target": "dog_dock",
+      "task_id": "airport_3c603969ea3140ecb914f94122159638"
+    },
+    {
+      "cell": "A",
+      "robot": "logistics_2",
+      "sim": 123.656,
+      "target": "amr_dock_2",
+      "task_id": "airport_5332f7e7b8b54b1f8e5a1dfd3a6cbe5c"
+    },
+    {
+      "cell": "E",
+      "robot": "inspection_dog_5",
+      "sim": 146.12,
+      "target": "inspect_e",
+      "task_id": "airport_ed808a3522b34370a8995ae2f0b7c9e9"
+    },
+    {
+      "cell": "E",
+      "robot": "logistics_5",
+      "sim": 163.696,
+      "target": "delivery_e",
+      "task_id": "airport_db909da2d3cf46cd98b1387ab79ba6ef"
+    },
+    {
+      "cell": "D",
+      "robot": "logistics_4",
+      "sim": 187.72,
+      "target": "amr_dock_4",
+      "task_id": "airport_df6d8a77b2ea43c99f525cc24b919287"
+    },
+    {
+      "cell": "D",
+      "robot": "inspection_dog_4",
+      "sim": 187.72,
+      "target": "dog_dock_4",
+      "task_id": "airport_b15a1790c85c4183a7f76ece55f51a52"
+    },
+    {
+      "cell": "F",
+      "robot": "inspection_dog_6",
+      "sim": 188.656,
+      "target": "inspect_f",
+      "task_id": "airport_cfd12a3991e24938bc81f6ef9e698bfd"
+    },
+    {
+      "cell": "F",
+      "robot": "logistics_6",
+      "sim": 206.752,
+      "target": "delivery_f",
+      "task_id": "airport_1e561b9334f0466492a4b2855a44c210"
+    },
+    {
+      "cell": "E",
+      "robot": "logistics_5",
+      "sim": 222.768,
+      "target": "amr_dock_5",
+      "task_id": "airport_b7a3b5fcf13943f4ae36bf29fe4ddc51"
+    },
+    {
+      "cell": "E",
+      "robot": "inspection_dog_5",
+      "sim": 222.768,
+      "target": "dog_dock_5",
+      "task_id": "airport_d6ce0502e885456d9a7d60288eca3843"
+    },
+    {
+      "cell": "F",
+      "robot": "inspection_dog_6",
+      "sim": 256.568,
+      "target": "dog_dock_6",
+      "task_id": "airport_65928f15b533460d8c5447a674b5704a"
+    },
+    {
+      "cell": "F",
+      "robot": "logistics_6",
+      "sim": 256.568,
+      "target": "amr_dock_6",
+      "task_id": "airport_f849ef0fe90140558bb0cf47e274c69c"
+    },
+    {
+      "cell": "G",
+      "robot": "inspection_dog_7",
+      "sim": 270.296,
+      "target": "inspect_g",
+      "task_id": "airport_345cd80a1fef46d2aab4e468e28ec1e3"
+    },
+    {
+      "cell": "G",
+      "robot": "logistics_7",
+      "sim": 287.56,
+      "target": "delivery_g",
+      "task_id": "airport_c5a68af13c0240d6823f8aa787228fe4"
+    },
+    {
+      "cell": "G",
+      "robot": "inspection_dog_7",
+      "sim": 327.288,
+      "target": "dog_dock_7",
+      "task_id": "airport_5e36f6dd2b954558abb523c3f8c0ebfb"
+    },
+    {
+      "cell": "G",
+      "robot": "logistics_7",
+      "sim": 327.288,
+      "target": "amr_dock_7",
+      "task_id": "airport_a0559d0a705841fa95eb18980cb03f6d"
+    }
+  ],
+  "evidence": [
+    {
+      "camera": "overview",
+      "label": "B区地面到点证据",
+      "sim_seconds": 56.68,
+      "url": "/evidence/20261111-002201-0819c4-B-d03baa-overview.jpg"
+    },
+    {
+      "camera": "dog",
+      "label": "A区地面到点证据",
+      "sim_seconds": 56.68,
+      "url": "/evidence/20261111-002201-0819c4-A-952436-dog.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "C区地面到点证据",
+      "sim_seconds": 56.68,
+      "url": "/evidence/20261111-002201-0819c4-C-656ed0-overview.jpg"
+    },
+    {
+      "camera": "drone",
+      "label": "A区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 68.016,
+      "url": "/evidence/20261111-002201-0819c4-A-fd3674-drone.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "B区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 68.016,
+      "url": "/evidence/20261111-002201-0819c4-B-8d6c63-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "C区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 68.64,
+      "url": "/evidence/20261111-002201-0819c4-C-ea8119-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "C区双方到位交接证据",
+      "sim_seconds": 88.296,
+      "url": "/evidence/20261111-002201-0819c4-C-fbc6d0-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "B区双方到位交接证据",
+      "sim_seconds": 108.68,
+      "url": "/evidence/20261111-002201-0819c4-B-801ea4-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "D区地面到点证据",
+      "sim_seconds": 111.384,
+      "url": "/evidence/20261111-002201-0819c4-D-1bea63-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "D区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 122.616,
+      "url": "/evidence/20261111-002201-0819c4-D-38e59b-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "A区双方到位交接证据",
+      "sim_seconds": 123.032,
+      "url": "/evidence/20261111-002201-0819c4-A-44f82a-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "E区地面到点证据",
+      "sim_seconds": 151.528,
+      "url": "/evidence/20261111-002201-0819c4-E-eece37-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "E区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 163.592,
+      "url": "/evidence/20261111-002201-0819c4-E-6bc131-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "D区双方到位交接证据",
+      "sim_seconds": 187.616,
+      "url": "/evidence/20261111-002201-0819c4-D-32b0fe-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "F区地面到点证据",
+      "sim_seconds": 194.896,
+      "url": "/evidence/20261111-002201-0819c4-F-fb4e9b-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "F区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 206.544,
+      "url": "/evidence/20261111-002201-0819c4-F-b3c079-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "E区双方到位交接证据",
+      "sim_seconds": 222.56,
+      "url": "/evidence/20261111-002201-0819c4-E-791a69-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "F区双方到位交接证据",
+      "sim_seconds": 256.256,
+      "url": "/evidence/20261111-002201-0819c4-F-fc4029-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "G区地面到点证据",
+      "sim_seconds": 275.6,
+      "url": "/evidence/20261111-002201-0819c4-G-7c85fe-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "G区空中到点复核证据（无 AI 识别）",
+      "sim_seconds": 287.248,
+      "url": "/evidence/20261111-002201-0819c4-G-a898e8-overview.jpg"
+    },
+    {
+      "camera": "overview",
+      "label": "G区双方到位交接证据",
+      "sim_seconds": 327.288,
+      "url": "/evidence/20261111-002201-0819c4-G-1fdeb6-overview.jpg"
+    }
+  ],
+  "finished": 1794356833.6973126,
+  "finished_sim": 363.168,
+  "id": "20261111-002201-0819c4",
+  "platform_task_id": "d6530c29-ab88-47a5-9852-f29f3508922f",
+  "selected_cells": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "started": 1794356521.5438356,
+  "started_sim": 51.064,
+  "status": "completed",
+  "steps": [
+    {
+      "detail": "DOG-01 至 DOG-07 · RMF 多车队并行巡检",
+      "name": "七区地面初检",
+      "status": "completed"
+    },
+    {
+      "detail": "DRONE-01 至 DRONE-07 · 到点告警后才起飞",
+      "name": "分层空中复核",
+      "status": "completed"
+    },
+    {
+      "detail": "复核确认后 ROBOT-01 至 ROBOT-07 前往不同交接点",
+      "name": "工具箱条件交接",
+      "status": "completed"
+    },
+    {
+      "detail": "参与设备返回待命位，报告和证据保存",
+      "name": "全队返航与归档",
+      "status": "completed"
+    }
+  ],
+  "task_ids": [
+    "airport_823f9f5dfc8144c7931b867e0c8da5eb",
+    "airport_42c129a8d79842c0956703c02306bf0c",
+    "airport_890a27fb9d144a189c6cafb1c633ed20",
+    "airport_d2ed3594c6b94acbbe5917d2b9d3de6d",
+    "airport_2289d14671524d4ebe1138ac8d0dd77b",
+    "airport_8fb05757b1d34870ba8212bb6b6c65ed",
+    "airport_6d1d722ac944496ea2b902852407ccb0",
+    "airport_432f9bcc8a5949a7890fc1e36b3139aa",
+    "airport_0d13a82218ee4a65993b4b7692293328",
+    "airport_3d973961d34046d2b419992a61be704d",
+    "airport_c00f42f5059a4065b0086948d2407830",
+    "airport_aaab562317f244d1b0fa48e7b3286966",
+    "airport_3c603969ea3140ecb914f94122159638",
+    "airport_5332f7e7b8b54b1f8e5a1dfd3a6cbe5c",
+    "airport_ed808a3522b34370a8995ae2f0b7c9e9",
+    "airport_db909da2d3cf46cd98b1387ab79ba6ef",
+    "airport_df6d8a77b2ea43c99f525cc24b919287",
+    "airport_b15a1790c85c4183a7f76ece55f51a52",
+    "airport_cfd12a3991e24938bc81f6ef9e698bfd",
+    "airport_1e561b9334f0466492a4b2855a44c210",
+    "airport_b7a3b5fcf13943f4ae36bf29fe4ddc51",
+    "airport_d6ce0502e885456d9a7d60288eca3843",
+    "airport_65928f15b533460d8c5447a674b5704a",
+    "airport_f849ef0fe90140558bb0cf47e274c69c",
+    "airport_345cd80a1fef46d2aab4e468e28ec1e3",
+    "airport_c5a68af13c0240d6823f8aa787228fe4",
+    "airport_5e36f6dd2b954558abb523c3f8c0ebfb",
+    "airport_a0559d0a705841fa95eb18980cb03f6d"
+  ],
+  "timeline": [
+    {
+      "cell": "A",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 51.064
+    },
+    {
+      "cell": "B",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 51.064
+    },
+    {
+      "cell": "C",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 51.064
+    },
+    {
+      "cell": "B",
+      "detail": "振动告警已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 56.784
+    },
+    {
+      "cell": "A",
+      "detail": "温升告警已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 56.784
+    },
+    {
+      "cell": "C",
+      "detail": "设备离线已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 57.304
+    },
+    {
+      "cell": "A",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 68.328
+    },
+    {
+      "cell": "B",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 68.328
+    },
+    {
+      "cell": "B",
+      "detail": "ROBOT-01 运送输送机维护工具箱",
+      "phase": "transport",
+      "sim": 68.328
+    },
+    {
+      "cell": "A",
+      "detail": "ROBOT-02 运送绝缘检测工具箱",
+      "phase": "transport",
+      "sim": 68.328
+    },
+    {
+      "cell": "C",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 68.848
+    },
+    {
+      "cell": "C",
+      "detail": "ROBOT-03 运送备用通信模块",
+      "phase": "transport",
+      "sim": 68.848
+    },
+    {
+      "cell": "C",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 84.344
+    },
+    {
+      "cell": "C",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 88.608
+    },
+    {
+      "cell": "B",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 104.624
+    },
+    {
+      "cell": "C",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 104.624
+    },
+    {
+      "cell": "D",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 104.624
+    },
+    {
+      "cell": "B",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 108.888
+    },
+    {
+      "cell": "D",
+      "detail": "压力复核已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 111.384
+    },
+    {
+      "cell": "A",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 119.392
+    },
+    {
+      "cell": "D",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 122.928
+    },
+    {
+      "cell": "D",
+      "detail": "ROBOT-04 运送压力检测工具",
+      "phase": "transport",
+      "sim": 122.928
+    },
+    {
+      "cell": "A",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 123.656
+    },
+    {
+      "cell": "B",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 146.12
+    },
+    {
+      "cell": "E",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 146.12
+    },
+    {
+      "cell": "E",
+      "detail": "闸机复核已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 151.944
+    },
+    {
+      "cell": "E",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 163.696
+    },
+    {
+      "cell": "E",
+      "detail": "ROBOT-05 运送闸机维护组件",
+      "phase": "transport",
+      "sim": 163.696
+    },
+    {
+      "cell": "D",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 183.664
+    },
+    {
+      "cell": "D",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 187.72
+    },
+    {
+      "cell": "A",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 188.656
+    },
+    {
+      "cell": "F",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 188.656
+    },
+    {
+      "cell": "F",
+      "detail": "通风复核已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 195.208
+    },
+    {
+      "cell": "F",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 206.752
+    },
+    {
+      "cell": "F",
+      "detail": "ROBOT-06 运送环境采样组件",
+      "phase": "transport",
+      "sim": 206.752
+    },
+    {
+      "cell": "E",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 218.504
+    },
+    {
+      "cell": "E",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 222.768
+    },
+    {
+      "cell": "F",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 252.304
+    },
+    {
+      "cell": "F",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 256.568
+    },
+    {
+      "cell": "D",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 270.296
+    },
+    {
+      "cell": "G",
+      "detail": "机器狗前往现场，空中与运输任务等待初检",
+      "phase": "inspect",
+      "sim": 270.296
+    },
+    {
+      "cell": "G",
+      "detail": "信号复核已注入；已满足起飞前置条件",
+      "phase": "air",
+      "sim": 276.016
+    },
+    {
+      "cell": "G",
+      "detail": "空中定点复核完成，等待空闲运输机器人",
+      "phase": "queue",
+      "sim": 287.56
+    },
+    {
+      "cell": "G",
+      "detail": "ROBOT-07 运送通信维护工具",
+      "phase": "transport",
+      "sim": 287.56
+    },
+    {
+      "cell": "E",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 294.528
+    },
+    {
+      "cell": "F",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 322.816
+    },
+    {
+      "cell": "G",
+      "detail": "双方实际到位，开始物资交接与工单确认",
+      "phase": "handoff",
+      "sim": 323.128
+    },
+    {
+      "cell": "G",
+      "detail": "交接已确认，设备返航；运输车返回仓位后释放给下一处任务",
+      "phase": "return",
+      "sim": 327.288
+    },
+    {
+      "cell": "G",
+      "detail": "现场工单闭环，设备均回到待命位",
+      "phase": "completed",
+      "sim": 363.168
+    }
+  ]
+}

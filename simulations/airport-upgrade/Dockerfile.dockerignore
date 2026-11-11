@@ -1,0 +1,8 @@
+.git
+**/__pycache__
+**/runtime
+platform_app/data
+.runtime
+tests
+simulations/airport
+*.zip

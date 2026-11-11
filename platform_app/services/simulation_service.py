@@ -27,6 +27,7 @@ def dispatch_waiting():
     from platform_app.services.sample_data_service import get_overview
     from platform_app.services.cost_service import execution_metrics, CAPACITY_KWH, resource_type
     overview=get_overview()
+    if overview.get('project', {}).get('runtime') != 'grid': return
     resources={r['id']:r for r in overview['resources']}
     for row in list_dispatches():
         if dispatch_state(row)!='执行中':continue
@@ -56,11 +57,13 @@ def dispatch_waiting():
 
 
 def start_demo_round():
-    """Restart the scripted round. Each browser refresh begins the same tasks again."""
+    """Explicitly restart the grid round while preserving airport work orders."""
     from platform_app.services.task_service import clear_runtime_tasks
     from platform_app.services.sample_data_service import get_overview
     from platform_app.services.dispatch_service import clear_dispatches
 
+    from platform_app.services.project_service import active_project
+    if active_project().get('runtime') != 'grid': raise ValueError('请先切换到已接入的电网项目')
     clear_dispatches()
     clear_runtime_tasks()
     tasks = list_tasks()

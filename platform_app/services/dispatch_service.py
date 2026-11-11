@@ -104,6 +104,9 @@ def recent_incidents():
 def create_dispatch(payload,tasks):
  tid=str(payload.get("task_id","")).strip();rid=str(payload.get("resource_id","")).strip();task=next((x for x in tasks if x.get("id")==tid),None)
  if not task:raise ValueError("Task not found")
+ if task.get('station')=='airport-t1':
+  from platform_app.services.airport_service import start_task
+  return start_task({'task_id':tid})
  if task.get("status") not in (PENDING,"待派发",SENT,RUNNING):raise ValueError("Task is already dispatched or completed")
  overview=get_overview();resource=next((x for x in overview.get("resources",[]) if x.get("id")==rid),None)
  if not resource:raise ValueError("Resource not found")

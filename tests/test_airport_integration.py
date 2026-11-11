@@ -70,7 +70,9 @@ class AirportIntegrationTests(unittest.TestCase):
 
     def test_feedback_includes_operation_feed(self):
         with patch('platform_app.routes.tasks.operation_feed', return_value=[{'id':'operation'}]), \
-             patch('platform_app.routes.tasks.list_feedback', return_value=[{'id':'manual'}]):
+             patch('platform_app.routes.tasks.list_feedback', return_value=[{'id':'manual','task_id':'t'}]), \
+             patch('platform_app.routes.tasks.list_tasks', return_value=[{'id':'t','station':'dispatch-pool'}]), \
+             patch('platform_app.services.project_service.active_project',return_value={'id':'dispatch-pool','runtime':'grid'}):
             status, body = handle_feedback('GET')
         self.assertEqual(status, 200)
         self.assertEqual([item['id'] for item in body], ['operation','manual'])

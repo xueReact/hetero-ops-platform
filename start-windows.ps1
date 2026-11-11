@@ -15,24 +15,13 @@ Push-Location $PSScriptRoot
 $previousUpstream = $env:AIRPORT_UPSTREAM
 $previousRuntime = $env:AIRPORT_RUNTIME_IMAGE
 try {
-    $reuse = $false
-    if (-not $Standalone) {
-        try {
-            $status = Invoke-RestMethod 'http://127.0.0.1:8094/api/status' -TimeoutSec 4
-            $reuse = ($null -ne $status.devices)
-        } catch { }
-    }
-    if ($reuse) {
-        Write-Host 'Connecting the existing airport service on port 8094.'
-        $env:AIRPORT_UPSTREAM = 'http://host.docker.internal:8094'
-        & $dockerPath compose up -d --build platform
-    } else {
-        Write-Host 'Starting the bundled airport service (first build may take time).'
-        $env:AIRPORT_UPSTREAM = 'http://airport:8080'
-        & $dockerPath image inspect rmf-airport-sim:humble *> $null
-        if ($LASTEXITCODE -eq 0) { $env:AIRPORT_RUNTIME_IMAGE = 'rmf-airport-sim:humble' }
-        & $dockerPath compose --profile airport up -d --build airport platform
-    }
+    # -Standalone remains accepted for existing shortcuts. Both paths now use
+    # the bundled 21-device runtime to keep the resource registry consistent.
+    Write-Host 'Starting the bundled airport service (first build may take time).'
+    $env:AIRPORT_UPSTREAM = 'http://airport:8080'
+    & $dockerPath image inspect rmf-airport-sim:humble *> $null
+    if ($LASTEXITCODE -eq 0) { $env:AIRPORT_RUNTIME_IMAGE = 'rmf-airport-sim:humble' }
+    & $dockerPath compose --profile airport up -d --build airport platform
     if ($LASTEXITCODE -ne 0) { throw 'Container startup failed. Review the Docker output above.' }
     $port = if ($env:FIRE_PUBLIC_PORT) { $env:FIRE_PUBLIC_PORT } else { '8001' }
     $url = "http://localhost:$port"

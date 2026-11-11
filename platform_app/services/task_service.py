@@ -25,10 +25,13 @@ def _read_records() -> list[dict]:
     return data
 
 
-def clear_runtime_tasks() -> None:
+def clear_runtime_tasks(project_id='dispatch-pool') -> None:
     with _lock:
         TASKS_FILE.parent.mkdir(parents=True, exist_ok=True)
-        TASKS_FILE.write_text("[]\n", encoding="utf-8")
+        keep = [r for r in _read_records() if r.get('station') != project_id]
+        temporary = TASKS_FILE.with_suffix('.tmp')
+        temporary.write_text(json.dumps(keep, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+        temporary.replace(TASKS_FILE)
 
 
 def list_tasks() -> list[dict]:
@@ -45,7 +48,9 @@ def list_tasks() -> list[dict]:
                 if route.get(field): route[field] = spatial_point(route[field])
             route['waypoints'] = [spatial_point(p) for p in route.get('waypoints', [])]
     from platform_app.services.cost_service import task_costs
-    return task_costs(overlay_dispatches(tasks))
+    from platform_app.services.airport_service import overlay_tasks
+    grid = task_costs(overlay_dispatches([t for t in tasks if t['station'] != 'airport-t1']))
+    return overlay_tasks([t for t in tasks if t['station'] == 'airport-t1']) + grid
 
 
 def create_task(payload: dict) -> dict:

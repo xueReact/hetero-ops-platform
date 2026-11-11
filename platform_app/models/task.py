@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from uuid import uuid4
 
 
-TASK_TYPES = {"robot", "team", "drone"}
+TASK_TYPES = {"robot", "team", "drone", "joint"}
 
 
 @dataclass
@@ -32,6 +32,17 @@ class Task:
             raise ValueError("请填写所属场站")
         if task_type not in TASK_TYPES:
             raise ValueError("任务类型无效")
+        from platform_app.services.project_service import catalog
+        project = next((p for p in catalog()['projects'] if p['id'] == station), None)
+        if not project: raise ValueError('所属项目不存在')
+        if not project.get('runtime'): raise ValueError('该项目尚未配置地图与运行服务，暂不能创建执行工单')
+        if station == 'airport-t1' and task_type != 'joint':
+            raise ValueError('机场任务请使用联合巡检类型，包含初检、复核和配送')
+        if task_type == 'joint' and station != 'airport-t1':
+            raise ValueError('联合巡检需要已配置的机场运行服务')
+        cells = (payload.get('requirements') or {}).get('cells', [])
+        if not isinstance(cells, list) or any(c not in list('ABCDEFG') for c in cells) or len(set(cells)) != len(cells):
+            raise ValueError('作业区必须是 A–G 的不重复列表')
         return cls(
             name=name[:50],
             station=station[:40],

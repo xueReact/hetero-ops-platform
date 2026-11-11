@@ -5,10 +5,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 
 from platform_app.config import HOST, PORT
+from platform_app.services import project_service, airport_service
 from platform_app.routes.pages import content_type, resolve_static_path
 from platform_app.airport_gateway import proxy_airport
 from platform_app.routes.tasks import handle_dispatch, handle_feedback, handle_network_sources, handle_overview, handle_planning, handle_tasks
-from platform_app.services.ai_dispatch_service import create_ai_dispatch_plan
+from platform_app.services.ai_dispatch_service import create_ai_dispatch_plan, create_ai_dispatch_report
 from platform_app.services.dispatch_service import reset_dispatch_history, trigger_random_incident
 from platform_app.services.task_service import create_emergency_task
 from platform_app.services.simulation_service import emergency_event, fault_event, dispatch_waiting, start_demo_round
@@ -21,6 +22,10 @@ class PlatformHandler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         if path.startswith("/airport-runtime/"):
             return proxy_airport(self)
+        if path == '/api/projects':
+            return self._send_json(200, project_service.catalog())
+        if path == '/api/airport/status':
+            return self._send_json(200, airport_service.unified_status())
         if path == "/api/health":
             return self._send_json(200, {"ok": True, "project": "fire-integrated-platform"})
         if path == "/api/overview":
@@ -44,7 +49,7 @@ class PlatformHandler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         if path.startswith("/airport-runtime/"):
             return proxy_airport(self)
-        if path not in ("/api/tasks", "/api/dispatch", "/api/feedback", "/api/ai/dispatch-plan", "/api/simulation/reset", "/api/simulation/demo", "/api/simulation/incident", "/api/simulation/emergency-task"):
+        if path not in ("/api/resources", "/api/projects", "/api/airport/start", "/api/tasks", "/api/dispatch", "/api/feedback", "/api/ai/dispatch-plan", "/api/ai/dispatch-report", "/api/simulation/reset", "/api/simulation/demo", "/api/simulation/incident", "/api/simulation/emergency-task"):
             return self._send_json(404, {"error": "Not found"})
         try:
             length = int(self.headers.get("Content-Length", "0"))
@@ -53,6 +58,17 @@ class PlatformHandler(BaseHTTPRequestHandler):
         if length > 1_000_000:
             return self._send_json(413, {"error": "请求内容过大"})
         body = self.rfile.read(length)
+        if (path.startswith('/api/simulation/') or path.startswith('/api/ai/')) and project_service.active_project().get('runtime') != 'grid':
+            return self._send_json(400, {'error':'当前项目请使用机场联合任务入口'})
+        if path in ('/api/resources', '/api/projects', '/api/airport/start'):
+            try:
+                payload = json.loads(body or b'{}')
+                if not isinstance(payload, dict): raise ValueError('请求内容必须是对象')
+                operation = {'/api/resources':project_service.update_resource, '/api/projects':project_service.update_project, '/api/airport/start':airport_service.start_task}[path]
+                value = operation(payload)
+                return self._send_json(200, value)
+            except (ValueError, RuntimeError) as exc:
+                return self._send_json(400, {'error': str(exc)})
         if path == "/api/simulation/reset":
             reset_dispatch_history()
             return self._send_json(200, {"ok": True})

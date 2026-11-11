@@ -37,19 +37,23 @@ def get_overview() -> dict:
     from platform_app.services.simulation_service import event_history
     from platform_app.services.dispatch_service import recent_incidents, resources_with_dispatches, list_dispatches
 
-    resources = enrich_resources(read_sample_file("resources.json"))
+    from platform_app.services.project_service import active_project, catalog, registry
+    from platform_app.services.airport_service import resources as airport_resources
+    project = active_project()
+    resources = enrich_resources(registry())
     try:
         environment = json.loads(ENVIRONMENT_FILE.read_text(encoding="utf-8"))
     except (FileNotFoundError, json.JSONDecodeError):
         environment = {"weather": {"condition": "多云", "wind_mps": 3.2, "precipitation_mm": 0, "visibility_km": 18}, "flight_allowed": True}
     return {
         "stations": read_sample_file("stations.json"),
-        "resources": resources_with_dispatches(resources),
-        "alarms": read_sample_file("alarms.json"),
-        "environment": environment,
+        "resources": airport_resources() if project['id'] == 'airport-t1' else resources_with_dispatches(resources) if project['runtime'] == 'grid' else [],
+        "project": project, "projects": catalog()['projects'],
+        "alarms": read_sample_file("alarms.json") if project['runtime'] == 'grid' else [],
+        "environment": environment if project['runtime'] == 'grid' else {},
         "telemetry_contract": TELEMETRY_CONTRACT,
-        "incidents": recent_incidents(),
+        "incidents": recent_incidents() if project['runtime'] == 'grid' else [],
         "route_reservations": [{"task_id":row.get("task_id"),"resource_name":row.get("resource_name"),"segments":len(row.get("reserved_road_segments") or []),"state":row.get("reservation_state","—"),"reauction_state":row.get("reauction_state")} for row in list_dispatches()[:12]],
-        "simulation_events": event_history(),
+        "simulation_events": event_history() if project['runtime'] == 'grid' else [],
         "terrain_predictions": TERRAIN_TYPES,
     }

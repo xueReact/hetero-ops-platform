@@ -52,7 +52,7 @@
       const routes=(this.data.plan?.assignments||[]).length;
       const shown=this.visibleResources().length;
       const node=this.host.querySelector('[data-space-count]');
-      if(node)node.textContent=this.mode==='airport'?'8 台设备':`${shown}/${this.data.resources.length} 台${routes?` · ${routes} 条路线`:''}`;
+      if(node)node.textContent=this.mode==='airport'?'28 个资源 · 21 台设备 + 7 名人员':`${shown}/${this.data.resources.length} 台${routes?` · ${routes} 条路线`:''}`;
       const button=this.host.querySelector('[data-show-all]');
       if(button){button.classList.toggle('active',this.showAll);button.setAttribute('aria-pressed',String(this.showAll));button.querySelector('.console-button-label').textContent=this.showAll?'仅看执行':'显示全部';}
     }
@@ -68,9 +68,9 @@
       if(this.mode!=='airport')this.gridMode=this.mode;
       const airport=this.mode==='airport';
       this.host.classList.toggle('airport-mode',airport);
-      this.host.classList.toggle('airport-loading',airport&&!this.airportReady);
+      this.host.classList.toggle('airport-loading',false);
       this.canvas.hidden=airport;
-      if(this.airportFrame){this.airportFrame.hidden=!airport;if(airport&&!this.airportFrame.src)this.airportFrame.src=this.airportFrame.dataset.src;}
+      this.host.querySelector('.altitude-axis').hidden=airport;if(this.airportFrame){this.airportFrame.hidden=!airport;if(airport&&!this.airportFrame.src)this.airportFrame.src=this.airportFrame.dataset.src;}
       this.host.querySelector('[data-view-3d]').classList.toggle('active',this.mode==='road');
       this.host.querySelector('[data-view-satellite]').classList.toggle('active',this.mode==='satellite');
       this.host.querySelector('[data-scene-grid]').classList.toggle('active',!airport);

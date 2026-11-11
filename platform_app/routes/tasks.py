@@ -37,7 +37,9 @@ def handle_overview() -> tuple[int, dict]:
 def handle_planning() -> tuple[int, dict]:
     try:
         overview = get_overview()
-        return 200, build_v1_plan(list_tasks(), overview.get("resources", []), overview.get("environment", {}))
+        if overview.get('project', {}).get('id') == 'airport-t1':
+            return 200, {'assignments': [], 'policies': [], 'engine': 'Open-RMF', 'project_id': 'airport-t1'}
+        return 200, build_v1_plan([t for t in list_tasks() if t['station'] != 'airport-t1'], overview.get("resources", []), overview.get("environment", {}))
     except RuntimeError as exc:
         return 500, {"error": str(exc)}
 
@@ -66,7 +68,13 @@ def handle_dispatch(body: bytes) -> tuple[int, dict]:
 def handle_feedback(method: str, body: bytes = b"") -> tuple[int, dict | list]:
     try:
         if method == "GET":
-            return 200, operation_feed() + list_feedback()
+            from platform_app.services.airport_service import feedback
+            from platform_app.services.project_service import active_project
+            project = active_project()
+            task_ids = {t['id'] for t in list_tasks() if t['station'] == project['id']}
+            manual = [f for f in list_feedback() if f.get('task_id') in task_ids]
+            automatic = feedback() if project['runtime'] == 'airport' else operation_feed() if project['runtime'] == 'grid' else []
+            return 200, automatic + manual
         payload = json.loads(body.decode("utf-8"))
         if not isinstance(payload, dict):
             return 400, {"error": "请求内容必须是 JSON 对象"}

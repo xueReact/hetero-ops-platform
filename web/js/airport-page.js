@@ -1,4 +1,4 @@
-/* Shell integration only: all device operations stay in the airport console. */
+/* Same-origin console backed by the shared project and resource services. */
 window.AirportConsole = (() => {
   let timer = null, pending = null, generation = 0;
   const $ = selector => document.querySelector(selector);
@@ -10,13 +10,14 @@ window.AirportConsole = (() => {
     pending = request;
     const timeout = setTimeout(() => request.abort(), 5000);
     try {
-      const response = await fetch('/airport-runtime/api/status', {cache:'no-store', signal:request.signal});
+      const response = await fetch('/api/airport/status', {cache:'no-store', signal:request.signal});
       if (!response.ok) throw new Error('unavailable');
       const status = await response.json();
+      if(status.connection_error) throw new Error('runtime disconnected');
       if (current !== generation || !$('#airportConnection')) return;
       const online = (status.devices || []).filter(device => device.online).length;
       const label = $('#airportConnection');
-      label.textContent = status.paused ? '已连接 · 现场已暂停' : status.ready ? `已连接 · ${online} 台设备在线` : '服务已连接 · 场景准备中';
+      label.textContent = status.paused ? '已连接 · 现场已暂停' : status.ready ? `已连接 · ${status.registry_count||28} 个资源 · ${online} 台设备在线` : '服务已连接 · 场景准备中';
       label.dataset.state = status.ready || status.paused ? 'online' : 'waiting';
       $('#airportUnavailable').hidden = true;
     } catch (_) {

@@ -34,12 +34,15 @@ RUN python3 -c "from pathlib import Path; p=Path('src/rmf_demos/rmf_demos_maps/C
 
 FROM ${RUNTIME_IMAGE} AS simulator
 SHELL ["/bin/bash", "-c"]
-COPY plugin /tmp/airport-plugin-source
+COPY simulations/airport-upgrade/plugin /tmp/airport-plugin-source
 RUN source /opt/ros/humble/setup.bash \
     && cmake -S /tmp/airport-plugin-source -B /tmp/airport-build \
     && cmake --build /tmp/airport-build -j2
-COPY . /opt/airport/
-RUN python3 /opt/airport/build_scene.py \
+COPY simulations/airport-upgrade /opt/airport/
+COPY sample_data/resources.json /opt/airport/resources.json
+COPY web/vendor/leaflet /opt/airport/site/vendor/leaflet
+RUN sed -i 's/\r$//' /opt/airport/start.sh \
+    && python3 /opt/airport/build_scene.py \
     && cp /tmp/airport-build/libairport_motion.so /opt/airport/runtime/ \
     && chmod +x /opt/airport/start.sh
 ENV ROS_DOMAIN_ID=45
